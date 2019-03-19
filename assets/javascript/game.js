@@ -22,11 +22,12 @@ var emptyWord = [];
         emptyWord.push("_ ");
     };
 computerChoiceText.textContent = emptyWord.join("");
+var remainingLetters = computerChoice.length;
 
 
 //Now, it's time for the user to start playing: we're creating an event to allow the user to pick a letter. If the letter is included in the "userChoices" array, then the letter will be written on the appropriate field in the document.
 
- document.onkeyup = function(event) {
+    document.onkeyup = function(event) {
         var lettersGuessedbyUser = event.key.toLowerCase();
 
         if ((userChoices.includes(lettersGuessedbyUser)) && (computerChoice.includes(lettersGuessedbyUser))) {
@@ -34,15 +35,19 @@ computerChoiceText.textContent = emptyWord.join("");
             var lettersGuessedText = document.getElementById("lettersGuessed");
             lettersGuessedText.textContent = lettersGuessed;
             computerChoiceText.textContent = lettersGuessedbyUser;
+            
 
-            for (var j = 0; j < computerChoice.length ; j++) {
-                emptyWord[computerChoice.indexOf(lettersGuessedbyUser)] = lettersGuessedbyUser;
+            for (var j = 0; j < computerChoice.length ; j++) { 
+                if (computerChoice[j] === lettersGuessedbyUser) {
+                    emptyWord[j] = lettersGuessedbyUser;
+                    --remainingLetters;
+                };
             };
             computerChoiceText.textContent = emptyWord.join("");
-
-
-        } else if ((userChoices.includes(lettersGuessedbyUser)) &&! (computerChoice.includes(lettersGuessedbyUser))) {
-            guessesRemainingText.textContent = guessesRemaining--;
+                
+            
+        } else if ((userChoices.includes(lettersGuessedbyUser)) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
+            guessesRemainingText.textContent = --guessesRemaining;
             lettersGuessed.push(lettersGuessedbyUser);
             var lettersGuessedText = document.getElementById("lettersGuessed");
             lettersGuessedText.textContent = lettersGuessed;
@@ -51,12 +56,3 @@ computerChoiceText.textContent = emptyWord.join("");
             console.log("Try again");
         };
     };
-
-
-
-
-      // for (var i = 0 ; i < computerChoice.length ; i++) {
-        //     if (emptyWord.indexOf("_") = computerChoice.indexOf(lettersGuessedbyUser)) {
-        //         emptyWord.replace(/ _/, lettersGuessedbyUser);
-        //         computerChoiceText.textContent = emptyWord;
-        //     }
