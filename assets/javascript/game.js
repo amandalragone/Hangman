@@ -17,16 +17,33 @@ var lettersGuessed = [];
 // ex: coldplay = 8 chars - if coldplay is the computerChoice. 8 is computerChoice.length
 
 var computerChoiceText = document.getElementById("computerChoice");
+var remainingLetters = computerChoice.length;
+console.log(remainingLetters);
 var emptyWord = [];
     for (var i = 0 ; i < computerChoice.length ; i++) {
         emptyWord.push("_ ");
+        if ((computerChoice[i] === " ") || (computerChoice[i] === "-")) {
+            emptyWord[i] = "-";
+            --remainingLetters;
+        };
     };
+    console.log(remainingLetters);
+   
 computerChoiceText.textContent = emptyWord.join("");
-var remainingLetters = computerChoice.length;
+
+
 
 
 //Now, it's time for the user to start playing: we're creating an event to allow the user to pick a letter. If the letter is included in the "userChoices" array, then the letter will be written on the appropriate field in the document.
 
+    //if remainingLetters= 0 and guessesRemaining > 0, user wins
+//if remainingLetters> 0 and guessesRemaining = 0, user loses
+
+if ((remainingLetters = 0) && (guessesRemaining > 0)) {
+    console.log("you win.");
+} else if ((remainingLetters > 0) && (guessesRemaining = 0)) {
+    console.log("you lose");
+} else {
     document.onkeyup = function(event) {
         var lettersGuessedbyUser = event.key.toLowerCase();
 
@@ -41,6 +58,7 @@ var remainingLetters = computerChoice.length;
                 if (computerChoice[j] === lettersGuessedbyUser) {
                     emptyWord[j] = lettersGuessedbyUser;
                     --remainingLetters;
+                    console.log(remainingLetters);
                 };
             };
             computerChoiceText.textContent = emptyWord.join("");
@@ -52,7 +70,12 @@ var remainingLetters = computerChoice.length;
             var lettersGuessedText = document.getElementById("lettersGuessed");
             lettersGuessedText.textContent = lettersGuessed;
             console.log("This letter is not correct. Try again");
+            console.log(guessesRemaining);
         } else {
             console.log("Try again");
         };
-    };
+};
+
+
+};
+
