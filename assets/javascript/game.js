@@ -1,9 +1,11 @@
+
+
 //These are the base vars, that will define the theme, wins number, and the possible choices the user can make.
 var theme = ["the killers", "mumford and sons", "good charlotte", "coldplay", "audioslave", "linkin park", "simple plan", "eminem", "britney spears", "avril lavigne", "nickelback", "evanescence", "new found glory", "yellowcard", "interpol", "weezer", "the all-american rejects", "jonas brothers", "jimmy eat world", "nsync", "backstreet boys", "spice girls"];
 var userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var wins = 0;
 
-//Now, we're starting the game in the backend, by letting the computer pick a random word from the "theme" array, setting up how many guessesRemaining the user will have for that word, resetting the number of wins and making it show up on the correct place, and creating a new var, "lettersGuessed".
+    //Now, we're starting the game in the backend, by letting the computer pick a random word from the "theme" array, setting up how many guessesRemaining the user will have for that word, resetting the number of wins and making it show up on the correct place, and creating a new var, "lettersGuessed".
 var computerChoice = theme[Math.floor(Math.random() * theme.length)];
 console.log(computerChoice)
 var guessesRemaining = computerChoice.length;
@@ -33,17 +35,12 @@ computerChoiceText.textContent = emptyWord.join("");
 
 
 
-
 //Now, it's time for the user to start playing: we're creating an event to allow the user to pick a letter. If the letter is included in the "userChoices" array, then the letter will be written on the appropriate field in the document.
 
     //if remainingLetters= 0 and guessesRemaining > 0, user wins
 //if remainingLetters> 0 and guessesRemaining = 0, user loses
 
-if ((remainingLetters = 0) && (guessesRemaining > 0)) {
-    console.log("you win.");
-} else if ((remainingLetters > 0) && (guessesRemaining = 0)) {
-    console.log("you lose");
-} else {
+
     document.onkeyup = function(event) {
         var lettersGuessedbyUser = event.key.toLowerCase();
 
@@ -74,8 +71,21 @@ if ((remainingLetters = 0) && (guessesRemaining > 0)) {
         } else {
             console.log("Try again");
         };
+
+        
+        
+        if ((remainingLetters === 0) && (guessesRemaining > 0)) {
+            // console.log("Congratulations, the correct word was" + computerChoice + "! We're setting your wins to" + wins + 1 + "!");
+            wins = wins + 1;
+            winsText.textContent = wins;
+
+            var pressKeyText = document.getElementById("press_key");
+            pressKeyText.textContent = "Congratulations, the correct word was " + computerChoice + "! We're setting your wins to" + wins + "! Now, let's pick another word and play again, shall we?"
+
+
+         } else if ((remainingLetters > 0) && (guessesRemaining === 0)) {
+            console.log("you lose");
+            // start.call(newGame);
+        };
+
 };
-
-
-};
-
