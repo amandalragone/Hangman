@@ -30,7 +30,7 @@ userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 lettersAlreadyUsed = [];
 
 computerChoice = theme[Math.floor(Math.random() * theme.length)];
-console.log(computerChoice)
+console.log(computerChoice);
 
 guessesRemaining = computerChoice.length;
 guessesRemainingText.textContent = guessesRemaining;
@@ -94,7 +94,7 @@ document.onkeyup = function(event) {
             pressKeyText.textContent = "Yay! The letter you selected is part of this word! Good job!";
                 
             
-        } else if ((userChoices.indexOf(lettersGuessedbyUser) > 0) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
+        } else if ((userChoices.indexOf(lettersGuessedbyUser) >= 0) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
 
             userChoices.splice(userChoices.indexOf(lettersGuessedbyUser), 1);
 
