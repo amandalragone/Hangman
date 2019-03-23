@@ -1,6 +1,6 @@
 //These are the base vars, that will define the theme, wins number, and the possible choices the user can make. Some of them are only declared in the Global scope. They get an assignment within the functions
 var wins = 0;
-var theme = ["the lord of the rings", "harry potter", "carry on", "it's kind of a funny story", "the tales of beedle the bard", "anya's ghost", "super sad true Love story", "angels and demons", "the da vinci code", "the little prince", "persuasion", "twilight", "the host", "the pillars of the earth", "the odyssey", "paper towns", "the fault in our stars", "the princess diaries", "animal farm", "the catcher in the rye", "the great gatsby", "water for elephants", "and then there were none", "the girl on the train", "of mice and men", "to kill a mockingbird"];
+var theme = ["the lord of the rings", "harry potter", "carry on", "it's kind of a funny story", "the tales of beedle the bard", "anya's ghost", "super sad true love story", "angels and demons", "the da vinci code", "the little prince", "persuasion", "twilight", "the host", "the pillars of the earth", "the odyssey", "paper towns", "the fault in our stars", "the princess diaries", "animal farm", "the catcher in the rye", "the great gatsby", "water for elephants", "and then there were none", "the girl on the train", "of mice and men", "to kill a mockingbird"];
 
 var userChoices
 var computerChoice
