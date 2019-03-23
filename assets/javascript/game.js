@@ -1,8 +1,8 @@
 //These are the base vars, that will define the theme, wins number, and the possible choices the user can make. Some of them are only declared in the Global scope. They get an assignment within the functions
 var wins = 0;
 var theme = ["the killers", "mumford and sons", "good charlotte", "coldplay", "audioslave", "linkin park", "simple plan", "eminem", "britney spears", "avril lavigne", "nickelback", "evanescence", "new found glory", "yellowcard", "interpol", "weezer", "the all-american rejects", "jonas brothers", "jimmy eat world", "nsync", "backstreet boys", "spice girls"];
-var userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+var userChoices
 var computerChoice
 var lettersGuessed
 var lettersGuessedbyUser
@@ -22,6 +22,11 @@ var pressKeyText = document.getElementById("press_key");
 
 var newGame = function () {
 
+lettersGuessed = [];
+lettersGuessedText.textContent = lettersGuessed;
+
+userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
 computerChoice = theme[Math.floor(Math.random() * theme.length)];
 console.log(computerChoice)
 
@@ -30,7 +35,7 @@ guessesRemainingText.textContent = guessesRemaining;
 
 winsText.textContent = wins;
 
-lettersGuessed = [];
+
 
 //After the computer makes its choice, we need some empty spaces to show up on the "Current Word" field. The number of empty spaces need to correspond to the number of letters in the word.
 // ex: coldplay = 8 chars - if coldplay is the computerChoice. 8 is computerChoice.length
@@ -67,10 +72,12 @@ document.onkeyup = function(event) {
     lettersGuessedbyUser = event.key.toLowerCase();
 
         if ((userChoices.includes(lettersGuessedbyUser)) && (computerChoice.includes(lettersGuessedbyUser))) {
-            lettersGuessed.push(lettersGuessedbyUser);
-            lettersGuessedText.textContent = lettersGuessed;
-            computerChoiceText.textContent = lettersGuessedbyUser;
-            
+            // lettersGuessed.push(lettersGuessedbyUser);
+            // lettersGuessedText.textContent = lettersGuessed;
+            // computerChoiceText.textContent = lettersGuessedbyUser;
+           userChoices.splice(userChoices.indexOf(lettersGuessedbyUser), 1);
+           console.log(userChoices);
+
             for (var j = 0; j < computerChoice.length ; j++) { 
                 if (computerChoice[j] === lettersGuessedbyUser) {
                     emptyWord[j] = lettersGuessedbyUser;
@@ -81,7 +88,10 @@ document.onkeyup = function(event) {
             computerChoiceText.textContent = emptyWord.join("");
                 
             
-        } else if ((userChoices.includes(lettersGuessedbyUser)) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
+        } else if ((userChoices.indexOf(lettersGuessedbyUser) > 0) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
+
+            userChoices.splice(userChoices.indexOf(lettersGuessedbyUser), 1);
+
             guessesRemainingText.textContent = --guessesRemaining;
             lettersGuessed.push(lettersGuessedbyUser);
             lettersGuessedText = document.getElementById("lettersGuessed");
@@ -91,6 +101,8 @@ document.onkeyup = function(event) {
         } else {
             console.log("Try again");
         };
+
+        
 
         
         
