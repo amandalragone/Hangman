@@ -1,6 +1,6 @@
 //These are the base vars, that will define the theme, wins number, and the possible choices the user can make. Some of them are only declared in the Global scope. They get an assignment within the functions
 var wins = 0;
-var theme = ["the killers", "mumford and sons", "good charlotte", "coldplay", "audioslave", "linkin park", "simple plan", "eminem", "britney spears", "avril lavigne", "nickelback", "evanescence", "new found glory", "yellowcard", "interpol", "weezer", "the all-american rejects", "jonas brothers", "jimmy eat world", "nsync", "backstreet boys", "spice girls"];
+var theme = ["the lord of the rings", "harry potter", "carry on", "it's kind of a funny story", "the tales of beedle the bard", "anya's ghost", "super sad true Love story", "angels and demons", "the da vinci code", "the little prince", "persuasion", "twilight", "the host", "the pillars of the earth", "the odyssey", "paper towns", "the fault in our stars", "the princess diaries", "animal farm", "the catcher in the rye", "the great gatsby", "water for elephants", "and then there were none", "the girl on the train", "of mice and men", "to kill a mockingbird"];
 
 var userChoices
 var computerChoice
@@ -9,6 +9,7 @@ var lettersGuessedbyUser
 var guessesRemaining
 var remainingLetters
 var emptyWord
+var lettersAlreadyUsed
 
 var guessesRemainingText = document.getElementById("guessesRemaining");
 var winsText = document.getElementById("wins");
@@ -26,6 +27,7 @@ lettersGuessed = [];
 lettersGuessedText.textContent = lettersGuessed;
 
 userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+lettersAlreadyUsed = [];
 
 computerChoice = theme[Math.floor(Math.random() * theme.length)];
 console.log(computerChoice)
@@ -48,8 +50,8 @@ emptyWord = [];
         if (computerChoice[i] === " ") {
             emptyWord[i] = " ";
             --remainingLetters;
-        } else if (computerChoice[i] === "-") {
-            emptyWord[i] = "-";
+        } else if (computerChoice[i] === "'") {
+            emptyWord[i] = "'";
             --remainingLetters;
         } else {
             emptyWord.push("_ ");
@@ -76,6 +78,8 @@ document.onkeyup = function(event) {
             // lettersGuessedText.textContent = lettersGuessed;
             // computerChoiceText.textContent = lettersGuessedbyUser;
            userChoices.splice(userChoices.indexOf(lettersGuessedbyUser), 1);
+           lettersAlreadyUsed.push(lettersGuessedbyUser);
+           console.log(lettersAlreadyUsed);
            console.log(userChoices);
 
             for (var j = 0; j < computerChoice.length ; j++) { 
@@ -86,6 +90,8 @@ document.onkeyup = function(event) {
                 };
             };
             computerChoiceText.textContent = emptyWord.join("");
+
+            pressKeyText.textContent = "Yay! The letter you selected is part of this word! Good job!";
                 
             
         } else if ((userChoices.indexOf(lettersGuessedbyUser) > 0) && (computerChoice.indexOf(lettersGuessedbyUser) === -1)) {
@@ -98,8 +104,14 @@ document.onkeyup = function(event) {
             lettersGuessedText.textContent = lettersGuessed;
             console.log("This letter is not correct. Try again");
             console.log(guessesRemaining);
+            pressKeyText.textContent = "Oh oh, the letter you chose is not part of the word selected. Try another one.";
+        } else if (lettersAlreadyUsed.includes(lettersGuessedbyUser)) {
+
+            pressKeyText.textContent = "It looks like you already guessed this letter. Try another one.";
+
         } else {
             console.log("Try again");
+            pressKeyText.textContent = "Oh oh, the key you pressed is not a letter. Try again.";
         };
 
         
@@ -111,7 +123,7 @@ document.onkeyup = function(event) {
             wins = wins + 1;
             winsText.textContent = wins;
 
-            pressKeyText.textContent = "Congratulations, the correct word was " + computerChoice.toUpperCase() + "! We're setting your wins to " + wins + "! Now, let's pick another word and play again, shall we?"
+            pressKeyText.textContent = "Congratulations, the book selected was " + computerChoice.toUpperCase() + "! We're setting your wins to " + wins + "! Now, let's pick another word and play again, shall we?"
             newGame();
 
          } else if ((remainingLetters > 0) && (guessesRemaining === 0)) {
