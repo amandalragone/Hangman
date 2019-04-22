@@ -30,7 +30,6 @@ userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 lettersAlreadyUsed = [];
 
 computerChoice = theme[Math.floor(Math.random() * theme.length)];
-console.log(computerChoice);
 
 guessesRemaining = computerChoice.length;
 guessesRemainingText.textContent = guessesRemaining;
@@ -43,7 +42,6 @@ winsText.textContent = wins;
 // ex: coldplay = 8 chars - if coldplay is the computerChoice. 8 is computerChoice.length
 
 remainingLetters = computerChoice.length;
-console.log(remainingLetters);
 
 emptyWord = [];
     for (var i = 0 ; i < computerChoice.length ; i++) {
@@ -57,7 +55,6 @@ emptyWord = [];
             emptyWord.push("_ ");
         };
     };
-    console.log(remainingLetters);
    
 computerChoiceText.textContent = emptyWord.join("");
 
@@ -74,19 +71,14 @@ document.onkeyup = function(event) {
     lettersGuessedbyUser = event.key.toLowerCase();
 
         if ((userChoices.includes(lettersGuessedbyUser)) && (computerChoice.includes(lettersGuessedbyUser))) {
-            // lettersGuessed.push(lettersGuessedbyUser);
-            // lettersGuessedText.textContent = lettersGuessed;
-            // computerChoiceText.textContent = lettersGuessedbyUser;
+            
            userChoices.splice(userChoices.indexOf(lettersGuessedbyUser), 1);
            lettersAlreadyUsed.push(lettersGuessedbyUser);
-           console.log(lettersAlreadyUsed);
-           console.log(userChoices);
 
             for (var j = 0; j < computerChoice.length ; j++) { 
                 if (computerChoice[j] === lettersGuessedbyUser) {
                     emptyWord[j] = lettersGuessedbyUser;
                     --remainingLetters;
-                    console.log(remainingLetters);
                 };
             };
             computerChoiceText.textContent = emptyWord.join("");
@@ -102,15 +94,12 @@ document.onkeyup = function(event) {
             lettersGuessed.push(lettersGuessedbyUser);
             lettersGuessedText = document.getElementById("lettersGuessed");
             lettersGuessedText.textContent = lettersGuessed;
-            console.log("This letter is not correct. Try again");
-            console.log(guessesRemaining);
             pressKeyText.textContent = "Oh oh, the letter you chose is not part of the word selected. Try another one.";
         } else if (lettersAlreadyUsed.includes(lettersGuessedbyUser)) {
 
             pressKeyText.textContent = "It looks like you already guessed this letter. Try another one.";
 
         } else {
-            console.log("Try again");
             pressKeyText.textContent = "Oh oh, the key you pressed is not a letter. Try again.";
         };
 
@@ -119,7 +108,6 @@ document.onkeyup = function(event) {
         
         
         if ((remainingLetters === 0) && (guessesRemaining > 0)) {
-            // console.log("Congratulations, the correct word was" + computerChoice + "! We're setting your wins to" + wins + 1 + "!");
             wins = wins + 1;
             winsText.textContent = wins;
 
@@ -127,7 +115,6 @@ document.onkeyup = function(event) {
             newGame();
 
          } else if ((remainingLetters > 0) && (guessesRemaining === 0)) {
-            console.log("you lose");
         
             pressKeyText.textContent = "Oh oh... The correct word was " + computerChoice.toUpperCase() + "... But don't worry. Let's try again!";
             newGame();
