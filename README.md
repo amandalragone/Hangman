@@ -1,6 +1,8 @@
 # The Bookworm Word Guess Game
 
-This is a Word Guess Game based on a book theme. When the player opens the game, the computer will select a random book name.
+This is a Word Guess Game based on a book theme. It can be accessed at https://amandalragone.github.io/Word-Guess-Game/.
+
+When the player opens the game, the computer will select a random book name.
 Then, the player needs to start guessing which letters are part of that word picked by the computer.
 
 If the player types in a letter that belongs to the title selected, a message will display saying that the letter is correct. The letter will also be added to the appropriate spot in the word.
